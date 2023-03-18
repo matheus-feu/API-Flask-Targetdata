@@ -9,8 +9,7 @@ from app.decorators.required_keys import require_keys
 from app.models.user import User
 
 
-
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['POST'])
 @require_keys(['username', 'password'])
 def login():
     request_login = User(**request.json)
@@ -28,9 +27,9 @@ def login():
 
         security_token = jwt.encode({
             'id': str(db_login.id),
-            'exp':exp,
+            'exp': exp,
             'username': db_login.username,
-        },secret)
+        }, secret)
 
         return {'token': security_token}
 

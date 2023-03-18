@@ -1,24 +1,21 @@
-import requests
-import xmltodict
-from flask import request, jsonify
-from flask_jwt_extended import jwt_required
-from unidecode import unidecode
 import xml.etree.ElementTree as ET
 
+import requests
+import xmltodict
+from flask import request
+from unidecode import unidecode
 
 from app import app, require_keys
-from app.config import APICep, APIInpe
 from app.decorators.auth import token_required
 from app.decorators.regex_cep_validate import regex_cep_validate
+from config.urls_api import APICep, APIInpe
 
 
 @app.route('/weather-address', methods=['GET'])
 @require_keys(['cep'])
 @regex_cep_validate
 @token_required()
-
 def address_weather(current_user):
-
     # Faz a consulta do endereço pelo CEP
     cep = request.json['cep']
 
@@ -30,7 +27,7 @@ def address_weather(current_user):
     city = via_cep_data_json.get('localidade')
 
     if not city:
-        return {'message': 'Cidade não encontrada'}, 404
+        return {'message': 'city not found'}, 404
 
     # Formata a cidade para consulta no INPE
     city_formated = unidecode(city)
@@ -46,7 +43,7 @@ def address_weather(current_user):
 
         return response_inpe_dict
 
-    return {'error': f'Clima de 4 dias na cidade {city} não encontrada'}
+    return {'error': f'4 days time in city {city} not found in INPE API'}, 404
 
 
 def generate_cod_inpe(city_formated, city):

@@ -3,6 +3,7 @@ from functools import wraps
 from flask import request
 
 from app.exceptions.json_payload_error import JSONPayloadError
+from app.exceptions.missing_json_error import MissingJSONKeyError
 
 
 def require_keys(keys):
@@ -17,8 +18,7 @@ def require_keys(keys):
 
             for key_value in keys:
                 if key_value not in data_request:
-                    return {
-                        "message": f"A chave '{key_value}' é requerida no corpo JSON da requisição, campo invalido!"}
+                    raise MissingJSONKeyError(key_value)
 
             return func(*args, **kwargs)
 

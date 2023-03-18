@@ -1,3 +1,5 @@
 DEBUG = True
 SECRET_KEY = 'Es7<upHFl=)DAKvjOxs~$(+'
 SESSION_EXPIRATE_MINUTES = 10
+
+
