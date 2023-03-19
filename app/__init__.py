@@ -2,13 +2,17 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_mongoengine import MongoEngine
 
+from app.utils.elasticsearch_logs import ElasticSearchLogger
+from config.log_elasticsearch import LoggerConfigElasticsearch
+from flasgger import Swagger
 
-# logging.basicConfig(filename='record.log', level=logging.DEBUG)
+es_logger = ElasticSearchLogger(
+    index_name=LoggerConfigElasticsearch.index_name,
+    elasticsearch_host=LoggerConfigElasticsearch.host)
 
-# swagger = Swagger(app, template_file='wrapper.yml')
 
 def create_app():
-    """Construct the core application."""
+    """Função responsável pela criação e instância do app Flask."""
     app = Flask(__name__)
     app.config.from_object('config')
     app.config['MONGODB_SETTINGS'] = {
@@ -16,6 +20,7 @@ def create_app():
         'host': 'localhost',
         'port': 27017
     }
+    swagger = Swagger(app, template_file='doc.yml')
 
     jwt = JWTManager(app)
     db = MongoEngine(app)
@@ -23,6 +28,8 @@ def create_app():
     return app
 
 
+# Rotas do app
 from app.controllers.auth.login import *
 from app.controllers.auth.signup import *
 from app.controllers.cep.weather_address import *
+from app.controllers.logs.requests_info_logs import *
