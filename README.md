@@ -18,8 +18,8 @@ Passo a passo:
 
 </aside>
 
-- [ ]  Crie logs de todas as requisições feita na sua api e salve no **ElasticSearch.**
-- [ ]  Crie um endpoint na sua api com o método **“GET”** para trazer todos os logs do usuário.
+- [x]  Crie logs de todas as requisições feita na sua api e salve no **ElasticSearch.**
+- [x]  Crie um endpoint na sua api com o método **“GET”** para trazer todos os logs do usuário.
     - Basicamente, o log de todas as informações da requisição possível do endpoint de consulta do CEP, como:
         - IP
         - User Agent,
@@ -29,8 +29,9 @@ Passo a passo:
         E se conseguir:
         
         - localização do IP e o provedor.
+- [x]  Crie um arquivo Dockfile e docker-compose.yaml para rodar o container da api.
 - [ ]  Crie uma documentação utilizando Swagger que fique disponível no endpoint **‘’/docs”.**
-- [ ]  Crie um arquivo Dockfile e docker-compose.yaml para rodar o container da api.
+- [ ]  Realizar testes da aplicação com o pytest (opcional)
 
 <aside>
 💡 **Obs:** Todos os endpoints devem retornar JSON.
