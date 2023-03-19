@@ -7,3 +7,17 @@ class APIInpe:
 class APICep:
     """Configuração de URLs de APIs externas."""
     URL = 'https://viacep.com.br/ws/'
+
+
+class APIRequestInspectionBin:
+    """Configuração de URLs de APIs externas."""
+    URL = 'http://httpbin.org/'
+
+
+class APIGeoLocation:
+    """Configuração de URLs de APIs externas."""
+    URL = 'http://ip-api.com/json/'
+
+
+class ElasticsearchLogs:
+    URL = 'http://localhost:9200/logs_api/_search'
