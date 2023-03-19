@@ -3,7 +3,7 @@ from flask_jwt_extended import JWTManager
 from flask_mongoengine import MongoEngine
 
 from app.utils.elasticsearch_logs import ElasticSearchLogger
-from config.log_elasticsearch import LoggerConfigElasticsearch
+from config.model_elasticseach_log import LoggerConfigElasticsearch
 from flasgger import Swagger
 
 es_logger = ElasticSearchLogger(
