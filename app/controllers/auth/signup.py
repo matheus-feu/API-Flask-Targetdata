@@ -1,5 +1,6 @@
 from flask import request
 from werkzeug.security import generate_password_hash
+
 from app import app, require_keys
 from app.models.user import User
 
@@ -7,6 +8,8 @@ from app.models.user import User
 @app.route('/signup', methods=['POST'])
 @require_keys(['username', 'password'])
 def signup():
+    """Cria um novo usuário no banco de dados apartir dos dados
+    passados no corpo da requisição JSON"""
     registered_user = User(**request.json)
 
     if registered_user.validate_user_exists():

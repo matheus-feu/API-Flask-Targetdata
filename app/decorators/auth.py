@@ -9,8 +9,11 @@ from app.models.user import User
 
 def token_required():
     def decorator(function):
+        """Esta função é um decorator que verifica se o token passado no header da requisição é válido."""
         @wraps(function)
         def wrapper(*args, **kwargs):
+            """Esta função é um wrapper que verifica se o token passado no header da requisição é válido.
+            Se o token for válido, o usuário é passado como parâmetro para a função que vai ser decorada."""
 
             token = None
 

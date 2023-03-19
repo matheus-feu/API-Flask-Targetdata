@@ -7,9 +7,12 @@ from app.exceptions.missing_json_error import MissingJSONKeyError
 
 
 def require_keys(keys):
+    """Essa função é um decorador que verifica se as chaves estão no json da requisição."""
     def decorator(func):
+        """Nesta função é feita a verificação se as chaves estão no json da requisição."""
         @wraps(func)
         def wrapper(*args, **kwargs):
+            """Nesta função recebe os argumentos e verifica se as chaves estão no json da requisição."""
 
             if not request.is_json:
                 raise JSONPayloadError()

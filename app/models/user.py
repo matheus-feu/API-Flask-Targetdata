@@ -2,6 +2,7 @@ from mongoengine import Document, StringField
 
 
 class User(Document):
+    """Classe que representa um usuário no banco de dados, há métodos que valida se o usuário já existe e retorna o usuário"""
     username = StringField(required=True, unique=True)
     password = StringField(required=True)
 

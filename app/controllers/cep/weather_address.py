@@ -16,9 +16,12 @@ from config.urls_api import APICep, APIInpe
 @regex_cep_validate
 @token_required()
 def address_weather(current_user):
-    # Faz a consulta do endereço pelo CEP
+    """Esta função faz a consulta do endereço pelo CEP na API ViaCep
+    e retorna a previsão do tempo em 4 dias"""
+
     cep = request.json['cep']
 
+    # Faz a consulta do endereço pelo CEP na API ViaCep
     via_cep_response = requests.get(f"{APICep.URL}{cep}/json/")
 
     via_cep_data_json = via_cep_response.json()
@@ -47,6 +50,9 @@ def address_weather(current_user):
 
 
 def generate_cod_inpe(city_formated, city):
+    """Esta função faz a consulta da cidade na API do INPE e obter o
+    código da cidade e retorna o código da cidade"""
+
     response = requests.get(
         APIInpe.URL,
         params={'city': city_formated})
