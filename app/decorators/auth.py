@@ -2,7 +2,7 @@ from functools import wraps
 
 import jwt
 from flask import request
-
+from app import es_logger
 from app import app
 from app.models.user import User
 
@@ -19,6 +19,7 @@ def token_required():
 
             # verificar se a chave x-access-token existe
             if not "x-access-token" in request.headers:
+                es_logger.warning("Key x-access-token is missing!")
                 return "Key x-access-token is missing!", 400
 
             # capturar o token da chave x-access-token
@@ -28,9 +29,13 @@ def token_required():
                 # decodificar o token
                 # verificar se o token é válido
                 data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+                es_logger.info("Token is valid!")
             except jwt.ExpiredSignatureError:
+                es_logger.warning("Session Expired!")
                 return "Session Expired", 401
+
             except:
+                es_logger.warning("Invalid token!")
                 return "Invalid token!", 401
 
             # verificar se o usuário existe

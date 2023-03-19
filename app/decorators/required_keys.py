@@ -1,7 +1,7 @@
 from functools import wraps
 
 from flask import request
-
+from app import es_logger
 from app.exceptions.json_payload_error import JSONPayloadError
 from app.exceptions.missing_json_error import MissingJSONKeyError
 
@@ -21,6 +21,7 @@ def require_keys(keys):
 
             for key_value in keys:
                 if key_value not in data_request:
+                    es_logger.warning(f"Key {key_value} is missing!")
                     raise MissingJSONKeyError(key_value)
 
             return func(*args, **kwargs)

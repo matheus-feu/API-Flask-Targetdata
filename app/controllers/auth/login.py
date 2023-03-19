@@ -7,10 +7,12 @@ from werkzeug.security import check_password_hash
 from app import create_app
 from app.decorators.required_keys import require_keys
 from app.models.user import User
+from app import es_logger
 
 app = create_app()
 
-@app.route('/login', methods=['POST'])
+
+@app.route('/api/login', methods=['POST'])
 @require_keys(['username', 'password'])
 def login():
     """Esta função é responsável por validar as credenciais do usuário e
@@ -23,9 +25,11 @@ def login():
     db_login = request_login.validate_user_exists()
 
     if db_login:
+
         # Check if password is correct
         if not check_password_hash(db_login.password, request_login.password):
-            return {'message': 'Invalid username or password'}, 401
+            es_logger.warning(f'Senha invalida para o usuario: {request_login.username} ')
+            return {'message': f'Senha invalida para o usuario: {request_login.username}'}, 401
 
         # Time to expire token
         exp = datetime.utcnow() + timedelta(minutes=app.config['SESSION_EXPIRATE_MINUTES'])
@@ -38,8 +42,10 @@ def login():
             'exp': exp,
             'username': db_login.username,
         }, secret)
-
+        es_logger.info(f'Usuario: {request_login.username} logado com sucesso')
+        es_logger.info('Token gerado com sucesso')
         return {'token': security_token}
 
     else:
-        return {'message': 'User does not exist'}, 404
+        es_logger.warning(f'Usuario: {request_login.username} não existe')
+        return {'message': f'Usuario: {request_login.username} não existe'}, 404
