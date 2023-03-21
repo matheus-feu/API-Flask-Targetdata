@@ -1,0 +1,44 @@
+tags:
+  - Authentication
+summary: "Registrar usuário e senha."
+consumes:
+  - "application/json"
+
+parameters:
+  - in: "body"
+    name: signup
+    description: Registrar com usuário e senha no corpo da requisição
+    schema:
+      type: array
+      items:
+      $ref: "#/definitions/signup"
+    required:
+      - username
+      - password
+
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+
+responses:
+  201:
+    description: Quando um usuário faz login com sucesso
+  400:
+    description: Falha ao registrar devido a dados de solicitação inválidos
+
+definitions:
+  signup:
+    type: "object"
+    required:
+      - username
+      - password
+
+    properties:
+      username:
+        type: "string"
+        example: ""
+      password:
+        type: "string"
+        example: ""

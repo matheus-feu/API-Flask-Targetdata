@@ -1,0 +1,48 @@
+tags:
+  - Authentication
+summary: "Logar usuário e senha."
+consumes:
+    - "application/json"
+
+parameters:
+  - in: "body"
+    name: login
+    description: Logar com usuário e senha no corpo da requisição
+    schema:
+      type: array
+      items:
+      $ref: "#/definitions/login"
+    required:
+      - username
+      - password
+
+    properties:
+      username:
+        type: "string"
+      password:
+        type: "string"
+
+responses:
+    "200":
+      description: Logado com sucesso!
+      schema:
+        type: "string"
+    "400":
+      description: Nome de usuário/senha fornecidos são inválidos.
+      schema:
+        type: "string"
+
+definitions:
+  login:
+    type: "object"
+    required:
+      - username
+      - password
+    properties:
+
+      username:
+        type: "string"
+        example: ""
+      password:
+        type: "string"
+        example: ""

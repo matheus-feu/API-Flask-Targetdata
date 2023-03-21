@@ -1,0 +1,108 @@
+tags:
+  - Cep
+summary: "Retorna a previsão do tempo."
+
+consumes:
+  - application/json
+
+parameters:
+  - in: "body"
+    name: Consulta CEP
+    description: "Informar o CEP para realizar a requisição da previsão do tempo."
+    schema:
+      type: "object"
+      $ref: "#/definitions/cep"
+    required:
+      - cep
+
+    properties:
+      cep:
+        type: "string"
+
+security:
+  - APIKeyHeader: [ 'x-access-token' ]
+
+responses:
+  "200":
+    description: "Previsão do tempo em 4 dias."
+    schema:
+      $ref: "#/definitions/localidade"
+  "400":
+    description: ""
+    schema:
+      type: "string"
+      example: "CEP inválido."
+  "404":
+    description: ""
+    schema:
+      type: "string"
+      example: "CEP não encontrado."
+
+
+definitions:
+  cep:
+    type: "object"
+    required:
+      - cep
+
+    properties:
+      cep:
+        type: "string"
+        example: ""
+
+  localidade:
+    type: "object"
+
+    properties:
+      cep:
+        type: "object"
+        example: {
+          "bairro": "Jardim Santa Terezinha",
+          "cep": "07134100",
+          "complemento": "",
+          "ddd": "11",
+          "gia": "3360",
+          "ibge": "35180",
+          "localidade": "Tatuí",
+          "logradouro": "Rua João de Oliveira",
+          "siafi": "6477",
+          "uf": "PR"
+        }
+
+      cidade:
+        type: "object"
+        example: {
+          "atualizacao": "2023-03-20",
+          "nome": "Tatuí",
+          "previsao": [
+            {
+              "dia": "2023-03-21",
+              "iuv": "11.0",
+              "maxima": "29",
+              "minima": "19",
+              "tempo": "pn"
+            },
+            {
+              "dia": "2023-03-22",
+              "iuv": "10.0",
+              "maxima": "28",
+              "minima": "17",
+              "tempo": "pn"
+            },
+            {
+              "dia": "2023-03-23",
+              "iuv": "11.0",
+              "maxima": "28",
+              "minima": "17",
+              "tempo": "c"
+            },
+            {
+              "dia": "2023-03-24",
+              "iuv": "11.0",
+              "maxima": "27",
+              "minima": "18",
+              "tempo": "c"
+            }
+          ],
+              "uf": "PR"
+          }

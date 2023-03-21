@@ -1,0 +1,23 @@
+tags:
+  - Logs
+
+summary: "Retorna os logs salvos no Elastic Search"
+description: "O método GET /logs retorna os logs salvos no Elastic Search, como User-Agent, IP, Provedor e Localização."
+
+produces:
+  - application/json
+
+parameters: [ ]
+
+responses:
+  "200":
+    description: "Retorna os logs salvos no Elastic Search"
+    schema:
+      type: "array"
+      example: '[{"logger": "logs_api","message": "Consulta sucedida: 07876500 - IP: 145.224.217.19 - User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0 - Provedor: VIP BR TELECOM S.A - City: São Paulo - Codígo: 244"}, {"logger": "logs_api","message": "Usuario: matheus já existe"}, {"logger": "logs_api","message": "Usuario: matheus logado com sucesso"}, {"logger": "logs_api","message": "Token gerado com sucesso"}]'
+
+
+
+
+
+
