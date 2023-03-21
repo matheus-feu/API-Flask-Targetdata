@@ -1,11 +1,12 @@
 import requests as req
-from app import create_app
-from config.urls_api import ElasticsearchLogs
+from flasgger import swag_from
 
-app = create_app()
+from app import app
+from app.config.urls_api import ElasticsearchLogs
 
 
-@app.route('/api/logs', methods=['GET'])
+@app.route('/api/logs_api/_search', methods=['GET'])
+@swag_from('../../docs/logs.yml')
 def get_logs():
     """Get logs from Elasticsearch."""
     response = req.get(ElasticsearchLogs.URL)

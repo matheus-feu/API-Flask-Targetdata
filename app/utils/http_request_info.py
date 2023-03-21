@@ -1,5 +1,6 @@
 import requests as req
-from config.urls_api import APIRequestInspectionBin, APIGeoLocation
+from app.config.urls_api import APIRequestInspectionBin, APIGeoLocation
+
 
 
 class HttpRequestInfo:

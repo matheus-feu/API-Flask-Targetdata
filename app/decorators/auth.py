@@ -2,14 +2,15 @@ from functools import wraps
 
 import jwt
 from flask import request
-from app import es_logger
-from app import app
+
+from app import es_logger, app
 from app.models.user import User
 
 
 def token_required():
     def decorator(function):
         """Esta função é um decorator que verifica se o token passado no header da requisição é válido."""
+
         @wraps(function)
         def wrapper(*args, **kwargs):
             """Esta função é um wrapper que verifica se o token passado no header da requisição é válido.

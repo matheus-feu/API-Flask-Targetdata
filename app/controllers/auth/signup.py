@@ -1,12 +1,15 @@
+from flasgger import swag_from
 from flask import request
 from werkzeug.security import generate_password_hash
-from app import es_logger
-from app import app, require_keys
+
+from app import es_logger, app
+from app.decorators.required_keys import require_keys
 from app.models.user import User
 
 
 @app.route('/api/signup', methods=['POST'])
 @require_keys(['username', 'password'])
+@swag_from('../../docs/signup.yml')
 def signup():
     """
     Cria um novo usuário no banco de dados apartir dos dados

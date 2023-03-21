@@ -6,3 +6,5 @@ load_dotenv()
 DEBUG = True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 SESSION_EXPIRATE_MINUTES = 10
+
+APP_NAME = 'Flask API Target Data - CEP'

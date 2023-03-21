@@ -1,16 +1,17 @@
 import xml.etree.ElementTree as ET
-from app import es_logger
 
 import requests
 import xmltodict
+from flasgger import swag_from
 from flask import request
 from unidecode import unidecode
 
-from app import app, require_keys
+from app import es_logger, app
+from app.config.urls_api import APICep, APIInpe
 from app.decorators.auth import token_required
 from app.decorators.regex_cep_validate import regex_cep_validate
-from app.utils.http_request_info import  HttpRequestInfo
-from config.urls_api import APICep, APIInpe
+from app.decorators.required_keys import require_keys
+from app.utils.http_request_info import HttpRequestInfo
 
 http_request_info = HttpRequestInfo()
 ip_address = http_request_info.get_request_info('ip_address')
@@ -21,16 +22,17 @@ provider = geo_location['org'] if geo_location['org'] else 'Unknown'
 
 log_format = f'IP: {ip_address} - User-Agent: {user_agent} - Provider: {provider} - City: {city_ip}'
 
-@app.route('/api/weather-address', methods=['GET'])
+
+@app.route('/api/weather-address', methods=['POST'])
+@token_required()
 @require_keys(['cep'])
 @regex_cep_validate
-@token_required()
+@swag_from('../../docs/cep.yml')
 def address_weather(current_user):
     """Esta função faz a consulta do endereço pelo CEP na API ViaCep
     e retorna a previsão do tempo em 4 dias"""
 
     cep = request.json['cep']
-
 
     # Faz a consulta do endereço pelo CEP na API ViaCep
     via_cep_response = requests.get(f"{APICep.URL}{cep}/json/")
@@ -42,6 +44,7 @@ def address_weather(current_user):
 
     if not city:
         return {'message': f'Cidade não encontrada: {city}'}, 404
+
     # Formata a cidade para consulta no INPE
     city_formated = unidecode(city)
 
@@ -61,12 +64,11 @@ def address_weather(current_user):
 
 
 def generate_cod_inpe(city_formated, city):
-    """Esta função faz a consulta da cidade na API do INPE e obter o
-    código da cidade e retorna o código da cidade"""
+    """Esta função faz a consulta da cidade na API do INPE e obtém o
+    código da cidade e retorna"""
 
     response = requests.get(
-        APIInpe.URL,
-        params={'city': city_formated})
+        APIInpe.URL, params={'city': city_formated})
 
     response_xml = ET.fromstring(response.content)
     codigo = None
