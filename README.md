@@ -42,7 +42,7 @@ do INPE.
 
 ## ⚙️ Instalação
 
-### 💻 Pré-requisitos
+#### 💻 Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
