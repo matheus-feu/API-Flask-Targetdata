@@ -19,5 +19,3 @@ class APIGeoLocation:
     URL = 'http://ip-api.com/json/'
 
 
-class ElasticsearchLogs:
-    URL = 'http://localhost:9200/logs_api/_search'

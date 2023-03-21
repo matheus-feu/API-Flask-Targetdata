@@ -1,5 +1,6 @@
-from elasticsearch import Elasticsearch
 import logging
+
+from elasticsearch import Elasticsearch
 
 
 class ElasticSearchLogger(logging.Logger):
@@ -19,27 +20,24 @@ class ElasticSearchLogger(logging.Logger):
         self.addHandler(handler)
         self.index_name = index_name
 
-    def log(self, level, message, extra=None):
-        super().log(level, message, extra=extra)
+    def log(self, level, message):
         document = {
             'level': level,
             'message': message,
             'logger': self.index_name
         }
-        if extra:
-            document.update(extra)
         self.es.index(index=self.index_name, body=document)
 
     """Atributos para cada tipo de log, retornando a mensagem de log. """
 
-    def info(self, message, extra=None):
-        self.log(logging.INFO, message, extra=extra)
+    def info(self, message):
+        self.log(logging.INFO, message)
 
-    def warning(self, message, extra=None):
-        self.log(logging.WARNING, message, extra=extra)
+    def warning(self, message):
+        self.log(logging.WARNING, message)
 
     def error(self, message, extra=None):
-        self.log(logging.ERROR, message, extra=extra)
+        self.log(logging.ERROR, message)
 
     def critical(self, message, extra=None):
-        self.log(logging.CRITICAL, message, extra=extra)
+        self.log(logging.CRITICAL, message)

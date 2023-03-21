@@ -1,15 +1,25 @@
-import requests as req
+from elasticsearch import Elasticsearch
 from flasgger import swag_from
 
 from app import app
-from app.config.urls_api import ElasticsearchLogs
 
 
-@app.route('/api/logs_api/_search', methods=['GET'])
+@app.route('/api/logs', methods=['GET'])
 @swag_from('../../docs/logs.yml')
 def get_logs():
-    """Get logs from Elasticsearch."""
-    response = req.get(ElasticsearchLogs.URL)
-    logs = [item['_source'] for item in response.json()['hits']['hits']]
+    """Pega os logs que estão no Elasticsearch, retorna uma lista de dicionários
+    contendo os logs dos usuários quando eles fazem uma requisição na API"""
+
+    es = Elasticsearch()
+
+    search_body = {
+        "query": {
+            "match_all": {}
+        }
+    }
+    result = es.search(index='logs_api', body=search_body, size=1000)
+
+    logs = [item['_source'] for item in result['hits']['hits']]
     [item.pop('level') for item in logs]
+
     return logs
