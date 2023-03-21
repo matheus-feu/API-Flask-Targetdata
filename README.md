@@ -4,22 +4,17 @@
 
 #### Autor: **[Matheus Feu](https://www.linkedin.com/in/matheus-feu-558558186/)**
 
-## <h3 align="center"> Índice </h3>
+## Índice 📋
 
-<p align="center">
-   <a href="#-sobre>"> Sobre 📝</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-   <a href="#-tecnologias-usadas>"> Tecnologias Usadas 🔗</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-   <a href="#-instalação>"> Instalação ⚙️</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-   <a href="#-execução>"> Execução 🎯</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-   <a href="#-endpoints>"> Endpoints 📌</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-   <a href="#-documentação>"> Documentação 📚</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-   <a href="#-contato>"> Contato 📞</a> 
-</p>
+- [Sobre](#-sobre)
+- [Tecnologias Usadas](#-tecnologias-usadas)
+- [Instalação](#-instalação)
+- [Execução](#-execução)
+- [Endpoints](#-endpoints)
+- [Documentação](#-documentação)
+- [Contato](#-contato)
 
-
-<a id="-sobre"></a>
-
-## Sobre 📝
+## 📝 Sobre
 
 Este projeto foi desenvolvido para o processo seletivo da [Targetdata](https://www.linkedin.com/company/targetdata/).
 Neste projeto foi desenvolvido uma API em Python com Flask que retorna JSON integrando com duas APIs públicas e
@@ -31,9 +26,9 @@ dentro de containers Docker.
 Tem o objetivo de consultar o CEP na API da ViaCEP e retornar a previsão do tempo dos 4 dias da cidade retornada na API
 do INPE.
 
-<a id="-tecnologias-usadas"></a>
+<div id="#tecnologias-usadas"></div>
 
-## Tecnologias Usadas 🔗
+## 🔗 Tecnologias Usadas
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
@@ -43,15 +38,16 @@ do INPE.
 ![ElasticSearch](https://img.shields.io/badge/elasticsearch-%234ea94b.svg?style=for-the-badge&logo=elasticsearch&logoColor=white)
 ![Swagger](https://img.shields.io/badge/Swagger-%23Clojure.svg?style=for-the-badge&logo=swagger&logoColor=white)
 
-<a id="-instalação"></a>
+---
 
-## Instalação ⚙️
+## ⚙️ Instalação
 
 ### 💻 Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
-- Você precisa instalar o [Docker](https://docs.docker.com/engine/install/) para criar os containers do MongoDB e do ElasticSearch.
+- Você precisa instalar o [Docker](https://docs.docker.com/engine/install/) para criar os containers do MongoDB e do
+  ElasticSearch.
 
 - Você instalar o versão mais recente do [Python](https://www.python.org/downloads/), estou utilizando a 3.11.
 
@@ -60,21 +56,29 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 - Possuir um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
   ou [PyCharm](https://www.jetbrains.com/pt-br/pycharm/).
 
-
 Com tudo em mãos, vamos ao passo a passo de como rodar o projeto, é bem simples a instalação de todas as dependências
 para que o projeto funcione corretamente.
 
-<a id="-execução"></a>
+---
 
-## Execução 🎯
+## 🎯 Execução
 
 #### Utilize os comandos abaixo para clonar o projeto e instalar as dependências seu terminal:
 
 ```bash
+# CLonar o repositório
 git clone https://github.com/matheus-feu/API-Flask-Targetdata.git
+
+# Entrar no diretório
 cd API-Flask-Targetdata
+
+# Criar um ambiente virtual
 virtualenv venv
+
+# Ativar o ambiente virtual
 venv\Scripts\activate
+
+# Instalar as dependências
 pip install -r requirements.txt
 ```
 
@@ -98,21 +102,19 @@ funcionando corretamente.
 
 ![documentacao](https://imgur.com/S2MJ9ne.png)
 
-<a id="-endpoints"></a>
-
-## Endpoints 📌
+## 📌 Endpoints
 
 - **POST** /login - Ao realizar o login será retornado um token de acesso que deverá ser utilizado nos demais endpoints.
 - **POST** /signup - Cria um usuário e senha para realizar o login.
 - **GET** /logs_api/_search - Retorna os logs da API salvo no ElasticSearch.
 - **POST** /weather-address - Recebe um CEP e retorna a previsão do tempo dos 4 dias da cidade retornada na API do INPE.
 
-<a id="-documentação"></a>
+---
 
-## Documentação 📚
+## 📚 Documentação
 
 A documentação da API foi feita utilizando o Swagger, para acessar a documentação acesse o
-endereço http://localhost:5000/apidocs/ e você terá acesso a documentação completa da API.
+endereço http://localhost:5000/ e você terá acesso a documentação completa da API.
 
 ### Flasgger
 
@@ -186,9 +188,9 @@ security_token = jwt.encode({
   return {'token': security_token}
 ```
 
-<id id="-contato"></id>
+---
 
-### Contato 📞
+### 📞 Contato
 
 - [Email](mailto:matheusfeu@gmail.com)
 - [Linkedin](https://www.linkedin.com/in/matheus-feu-558558186/)
