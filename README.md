@@ -10,8 +10,8 @@
 - [Tecnologias Usadas](#-tecnologias-usadas)
 - [Instalação](#-instalação)
 - [Execução](#-execução)
-- [Endpoints](#-endpoints)
 - [Documentação](#-documentação)
+- [Flasgger / JWT](#-flasgger-jwt)
 - [Contato](#-contato)
 
 ## 📝 Sobre
@@ -103,7 +103,7 @@ funcionando corretamente.
 
 ![documentacao](https://imgur.com/S2MJ9ne.png)
 
-## 📌 Endpoints
+## 📚  Documentação
 
 O fluxo de requisição é da seguinte forma:
 
@@ -242,7 +242,7 @@ Saída da consulta:
 ```
 ---
 
-## 📚 Documentação
+## 🔎 Flasgger / JWT 
 
 A documentação da API foi feita utilizando o Swagger, para acessar a documentação acesse o
 endereço http://localhost:5000/ e você terá acesso a documentação completa da API.
