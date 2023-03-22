@@ -84,7 +84,8 @@ pip install -r requirements.txt
 
 #### Agora vamos criar os containers:
 
-Nesta etapa você deverá executar o comando abaixo para baixar as imagens e subir os containers do MongoDB, ElasticSearch e da aplicação Flask, ele irá criar
+Nesta etapa você deverá executar o comando abaixo para baixar as imagens e subir os containers do MongoDB, ElasticSearch
+e da aplicação Flask, ele irá criar
 os containers e baixar as imagens necessárias que estão configurada no `Dockerfile` e o  `docker-compose.yml`.
 
 ```bash
@@ -104,11 +105,141 @@ funcionando corretamente.
 
 ## 📌 Endpoints
 
-- **POST** /login - Ao realizar o login será retornado um token de acesso que deverá ser utilizado nos demais endpoints.
-- **POST** /signup - Cria um usuário e senha para realizar o login.
-- **GET** /logs_api/_search - Retorna os logs da API salvo no ElasticSearch.
-- **POST** /weather-address - Recebe um CEP e retorna a previsão do tempo dos 4 dias da cidade retornada na API do INPE.
+O fluxo de requisição é da seguinte forma:
 
+- O usuário faz o cadastro na API;
+- O usuário faz o login na API e recebe um token JWT;
+- O usuário passa o x-acess-token no header da requisição para consumir o endpoint de consulta da previsão do tempo.;
+- O usuário envia o CEP para a API e recebe a previsão do tempo dos próximos 4 dias;
+- Há um método que salva todos os logs do usuário como: IP Address, User-Agent, Provedor,
+- Cidade e o código da cidade no ElasticSearch, podendo ser consultado através do endpoint /logs.
+
+
+**POST** /signup - Este endpoint é responsável por realizar o registro do usuário e senha na API.
+
+```bash
+{
+    "username": "username123"
+    "password": "password123"
+}
+```
+
+**POST** /login - Este endpoint é responsável por realizar o login na aplicação no corpo da requisição deve ser
+  enviado um JSON com o username e password.
+
+```bash
+{
+    "username": "username123"
+    "password": "password123"
+}
+```
+
+Ao realizar o login será retornado um x-acess-token JWT que deverá ser enviado no header da requisição para consumir
+o endpoint de consulta da previsão do tempo instruindo o CEP.
+
+Saída do token:
+
+```bash	
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MWE0NWY0M2QwYTcwMjgxZDllZjJjMyIsImV4cCI6MTY3OTQ0Njg3NCwidXNlcm5hbWUiOiJjYWx2byJ9.tjcV0GJgs-3XRA5_m4U4WZYQqrkRCQo2qznKHBJlwao"
+}
+```
+
+**POST** /weather-address - Neste endpoint recebe o CEP e retorna a previsão do tempo dos 4 dias da cidade retornada
+  na API do INPE.
+
+```bash
+{
+    "cep": "01001000"
+}
+```
+
+Saída da requisição:
+
+```bash
+{
+  "cep": {
+    "bairro": "Sé",
+    "cep": "01001-000",
+    "complemento": "lado ímpar",
+    "ddd": "11",
+    "gia": "1004",
+    "ibge": "3550308",
+    "localidade": "São Paulo",
+    "logradouro": "Praça da Sé",
+    "siafi": "7107",
+    "uf": "SP"
+  },
+  "cidade": {
+    "atualizacao": "2023-03-21",
+    "nome": "São Paulo",
+    "previsao": [
+      {
+        "dia": "2023-03-22",
+        "iuv": "10.0",
+        "maxima": "28",
+        "minima": "18",
+        "tempo": "pn"
+      },
+      {
+        "dia": "2023-03-23",
+        "iuv": "10.0",
+        "maxima": "28",
+        "minima": "18",
+        "tempo": "pn"
+      },
+      {
+        "dia": "2023-03-24",
+        "iuv": "10.0",
+        "maxima": "29",
+        "minima": "18",
+        "tempo": "ci"
+      },
+      {
+        "dia": "2023-03-25",
+        "iuv": "10.0",
+        "maxima": "28",
+        "minima": "18",
+        "tempo": "pn"
+      }
+    ],
+    "uf": "SP"
+  }
+}
+```
+
+**GET** /logs - Este endpoint é responsável por retornar todos os logs da aplicação salvos no ElasticSearch.
+
+Saída da consulta:
+
+```bash
+[
+  {
+    "logger": "logs_api",
+    "message": "Usuario: username123 criado com sucesso"
+  },
+  {
+    "logger": "logs_api",
+    "message": "Usuario: username123 logado com sucesso"
+  },
+  {
+    "logger": "logs_api",
+    "message": "Token gerado com sucesso"
+  },
+  {
+    "logger": "logs_api",
+    "message": "Token is valid!"
+  },
+  {
+    "logger": "logs_api",
+    "message": "CEP is valid"
+  },
+  {
+    "logger": "logs_api",
+    "message": "Consulta sucedida: 01001000 - IP: 178.224.458.23 - User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0 - Provider: VIP BR TELECOM S.A - City: São Paulo - Codígo: 244"
+  }
+]
+```
 ---
 
 ## 📚 Documentação
