@@ -77,7 +77,7 @@ para que o projeto funcione corretamente.
 
 ## 🎯 Execução
 
-#### Utilize os comandos abaixo para clonar o projeto e instalar as dependências seu terminal:
+#### Utilize os comandos abaixo para clonar o projeto e instalar as dependências no seu terminal:
 
 ```bash
 # CLonar o repositório
@@ -125,8 +125,8 @@ O fluxo de requisição é da seguinte forma:
 - O usuário faz o login na API e recebe um token JWT;
 - O usuário passa o x-acess-token no header da requisição para consumir o endpoint de consulta da previsão do tempo.;
 - O usuário envia o CEP para a API e recebe a previsão do tempo dos próximos 4 dias;
-- Há um método que salva todos os logs do usuário como: IP Address, User-Agent, Provedor,
-- Cidade e o código da cidade no ElasticSearch, podendo ser consultado através do endpoint /logs.
+- Há um método que salva todos os logs do usuário como: IP Address, User-Agent, Provedor, 
+Cidade e o código da cidade no ElasticSearch, podendo ser consultado através do endpoint /logs.
 
 **POST** /signup - Este endpoint é responsável por realizar o registro do usuário e senha na API.
 
