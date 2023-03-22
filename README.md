@@ -380,3 +380,4 @@ services:
 - [Linkedin](https://www.linkedin.com/in/matheus-feu-558558186/)
 - [Github](https://github.com/matheus-feu)
 - [Instagram](https://www.instagram.com/math_feu/)
+- [Lista de Tarefas](https://instinctive-paint-6d5.notion.site/Vaga-Desenvolvedor-Python-Backend-9445353dfbee4109afafa4f890a6fff0)
