@@ -12,8 +12,40 @@ services:
 
   mongo:
     image: mongo
-    container_name: mongo
+    container_name: mongodb
     restart: always
     ports:
       - 27017:27017
+
+  app:
+    build: .
+    container_name: flask-app
+    command: python -u run.py
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/API_TARGET_DATA
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - MONGODB_HOST = mongodb
+      - MONGODB_PORT = 27017
+    volumes:
+      - .:/flaskAPI-docker
+
+networks:
+  networks_bridge:
+    external:
+        name: networks_bridge
+
+
+
+
+
+
+
+
+
+
+
+
+
 
