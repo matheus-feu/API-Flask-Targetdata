@@ -11,20 +11,34 @@
 - [Instalação](#-instalação)
 - [Execução](#-execução)
 - [Endpoints](#-endpoints)
-- [Documentação](#-documentação)
+- [Bibliotecas](#-bibliotecas)
 - [Contato](#-contato)
 
 ## 📝 Sobre
 
 Este projeto foi desenvolvido para o processo seletivo da [Targetdata](https://www.linkedin.com/company/targetdata/).
-Neste projeto foi desenvolvido uma API em Python com Flask que retorna JSON integrando com duas APIs públicas e
-gratuitas e salva os logs no ElasticSearch.
+Neste projeto foi desenvolvido utilizando o ***microframework*** Flask escrita em **Python** que retorna JSON integrando
+com
+duas **APIs** públicas e
+gratuitas e salva os logs no ElasticSearch, o projeto foi desenvolvido utilizando o **Docker** para criar os containers
+do
+**MongoDB** e do **ElasticSearch** e a aplicação **Flask**.
 
-A API foi desenvolvida utilizando o ***microframework*** Flask escrita em Python, banco de dados MongoB e ElasticSearch
-dentro de containers Docker.
+A API oferece diversas funcionalidades que podem ser úteis para diferentes tipos de sistemas. Entre elas, estão as
+opções de login e registro, que permitem que os usuários acessem o sistema de forma segura e personalizada.
 
-Tem o objetivo de consultar o CEP na API da ViaCEP e retornar a previsão do tempo dos 4 dias da cidade retornada na API
-do INPE.
+Ela conta também com a possibilidade de gerar tokens de acesso garantindo que apenas usuários autorizados após o login
+possam realizar a consulta da previsão do tempo dos próximos 4 dias da cidade retornada na API do INPE.
+
+Outra funcionalidade da API, é a possibilidade de gerar logs de todas as requisições realizadas, como por exemplo: **IP
+**
+**Address**, **User-Agent**, **Provedor**, **Cidade** e o **código** da cidade que são salvas no ElasticSearch, podendo
+ser consultado
+através do endpoint /logs.
+
+No geral a API oferece uma solução completa para o sistema de previsão do tempo, oferece uma série de funcionalidades
+que podem ser úteis para diferentes tipos de sistemas.
+
 
 <div id="#tecnologias-usadas"></div>
 
@@ -242,20 +256,7 @@ Saída da consulta:
 
 ---
 
-## 📚 Documentação
-
-A API oferece diversas funcionalidades que podem ser úteis para diferentes tipos de sistemas. Entre elas, estão as
-opções de login e registro, que permitem que os usuários acessem o sistema de forma segura e personalizada.
-
-Ela conta também com a possibilidade de gerar tokens de acesso garantindo que apenas usuários autorizados após o login
-possam realizar a consulta da previsão do tempo dos próximos 4 dias da cidade retornada na API do INPE.
-
-Outra funcionalidade da API, é a possibilidade de gerar logs de todas as requisições realizadas, como por exemplo: IP
-Address, User-Agent, Provedor, Cidade e o código da cidade que são salvas no ElasticSearch, podendo ser consultado
-através do endpoint /logs.
-
-No geral a API oferece uma solução completa para o sistema de previsão do tempo, oferece uma série de funcionalidades
-que podem ser úteis para diferentes tipos de sistemas.
+## 📚 Bibliotecas
 
 ### Swagger
 
@@ -373,8 +374,15 @@ services:
 
 Assim, é possível salvar os logs da aplicação no ElasticSearch, que está rodando em um container Docker.
 
+### Docker
 
+O Docker é uma plataforma de código aberto para desenvolvimento, envio e execução de aplicativos. O Docker permite
+que você separe seus aplicativos de sua infraestrutura para que você possa entregar software rapidamente. Com o
+Docker, você pode gerenciar sua infraestrutura de TI e aplicativos de forma consistente em qualquer ambiente de
+desenvolvimento, teste, produção ou nuvem.
 
+Foi utilizado o Docker para criar um container para a aplicação e outro para o banco de dados e o ElasticSearch.
+Os arquivos `Dockerfile` e `docker-compose.yml` foram criados para facilitar a criação dos containers.
 
 ---
 
