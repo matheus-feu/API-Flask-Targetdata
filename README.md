@@ -372,18 +372,6 @@ services:
       - "9300:9300"
 ```
 
-Assim, é possível salvar os logs da aplicação no ElasticSearch, que está rodando em um container Docker.
-
-### Docker
-
-O Docker é uma plataforma de código aberto para desenvolvimento, envio e execução de aplicativos. O Docker permite
-que você separe seus aplicativos de sua infraestrutura para que você possa entregar software rapidamente. Com o
-Docker, você pode gerenciar sua infraestrutura de TI e aplicativos de forma consistente em qualquer ambiente de
-desenvolvimento, teste, produção ou nuvem.
-
-Foi utilizado o Docker para criar um container para a aplicação e outro para o banco de dados e o ElasticSearch.
-Os arquivos `Dockerfile` e `docker-compose.yml` foram criados para facilitar a criação dos containers.
-
 ---
 
 ### 📞 Contato
