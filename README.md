@@ -84,8 +84,8 @@ pip install -r requirements.txt
 
 #### Agora vamos criar os containers:
 
-Nesta etapa você deverá executar o comando abaixo para criar os containers do MongoDB e do ElasticSearch, ele irá criar
-os containers e baixar as imagens necessárias que estão configurada no `Dockerfile` eo  `docker-compose.yml`.
+Nesta etapa você deverá executar o comando abaixo para baixar as imagens e subir os containers do MongoDB, ElasticSearch e da aplicação Flask, ele irá criar
+os containers e baixar as imagens necessárias que estão configurada no `Dockerfile` e o  `docker-compose.yml`.
 
 ```bash
 docker-compose up -d
