@@ -17,5 +17,3 @@ class APIRequestInspectionBin:
 class APIGeoLocation:
     """Configuração de URLs de APIs externas."""
     URL = 'http://ip-api.com/json/'
-
-

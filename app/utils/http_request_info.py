@@ -5,6 +5,7 @@ from app.config.urls_api import APIRequestInspectionBin, APIGeoLocation
 
 class HttpRequestInfo:
     """Classe que faz requisições HTTP para obter informações da requisição"""
+
     def get_request_info(self, type_request, ip_address=None):
         """
         Esta função tem um dicionário (dispatch table) com as informações de

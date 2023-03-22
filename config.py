@@ -10,7 +10,9 @@ SESSION_EXPIRATE_MINUTES = 10
 
 APP_NAME = 'Flask API Target Data - CEP'
 
-MONGODB_NAME = 'API_TARGET_DATA'
-MONGODB_HOST = 'localhost'
-MONGODB_PORT = 27017
+MONGODB_SETTINGS = {
+    'db': "API_TARGET_DATA",
+    'host': os.environ.get('MONGODB_HOST', 'localhost'),
+    'port': int(os.environ.get('MONGODB_PORT', '27017'))
+}
 
