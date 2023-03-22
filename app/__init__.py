@@ -1,12 +1,10 @@
-import os
-
 from flasgger import Swagger
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_mongoengine import MongoEngine
 
+from app.config import LoggerConfigElasticsearch
 from app.config.swagger import swagger_config, template
-from app.models.elasticseach_log import LoggerConfigElasticsearch
 from app.utils.elasticsearch_logs import ElasticSearchLogger
 
 # Instanciando a aplicação
@@ -14,13 +12,6 @@ app = Flask(__name__)
 
 # Configuração da aplicação
 app.config.from_object('config')
-
-# Configuração do banco de dados
-app.config['MONGODB_SETTINGS'] = {
-    'db': app.config['MONGODB_NAME'],
-    'host': os.environ.get('MONGODB_HOST'),
-    'port': int(os.environ.get('MONGODB_PORT'))
-}
 
 db = MongoEngine(app)
 
