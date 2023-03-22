@@ -10,8 +10,8 @@
 - [Tecnologias Usadas](#-tecnologias-usadas)
 - [Instalação](#-instalação)
 - [Execução](#-execução)
+- [Endpoints](#-endpoints)
 - [Documentação](#-documentação)
-- [Flasgger / JWT](#-flasgger-jwt)
 - [Contato](#-contato)
 
 ## 📝 Sobre
@@ -103,7 +103,7 @@ funcionando corretamente.
 
 ![documentacao](https://imgur.com/S2MJ9ne.png)
 
-## 📚  Documentação
+## 📌 Endpoints
 
 O fluxo de requisição é da seguinte forma:
 
@@ -113,7 +113,6 @@ O fluxo de requisição é da seguinte forma:
 - O usuário envia o CEP para a API e recebe a previsão do tempo dos próximos 4 dias;
 - Há um método que salva todos os logs do usuário como: IP Address, User-Agent, Provedor,
 - Cidade e o código da cidade no ElasticSearch, podendo ser consultado através do endpoint /logs.
-
 
 **POST** /signup - Este endpoint é responsável por realizar o registro do usuário e senha na API.
 
@@ -125,7 +124,7 @@ O fluxo de requisição é da seguinte forma:
 ```
 
 **POST** /login - Este endpoint é responsável por realizar o login na aplicação no corpo da requisição deve ser
-  enviado um JSON com o username e password.
+enviado um JSON com o username e password.
 
 ```bash
 {
@@ -146,7 +145,7 @@ Saída do token:
 ```
 
 **POST** /weather-address - Neste endpoint recebe o CEP e retorna a previsão do tempo dos 4 dias da cidade retornada
-  na API do INPE.
+na API do INPE.
 
 ```bash
 {
@@ -240,9 +239,29 @@ Saída da consulta:
   }
 ]
 ```
+
 ---
 
-## 🔎 Flasgger / JWT 
+## 📚 Documentação
+
+A API oferece diversas funcionalidades que podem ser úteis para diferentes tipos de sistemas. Entre elas, estão as
+opções de login e registro, que permitem que os usuários acessem o sistema de forma segura e personalizada.
+
+Ela conta também com a possibilidade de gerar tokens de acesso garantindo que apenas usuários autorizados após o login
+possam realizar a consulta da previsão do tempo dos próximos 4 dias da cidade retornada na API do INPE.
+
+Outra funcionalidade da API, é a possibilidade de gerar logs de todas as requisições realizadas, como por exemplo: IP
+Address, User-Agent, Provedor, Cidade e o código da cidade que são salvas no ElasticSearch, podendo ser consultado
+através do endpoint /logs.
+
+No geral a API oferece uma solução completa para o sistema de previsão do tempo, oferece uma série de funcionalidades
+que podem ser úteis para diferentes tipos de sistemas.
+
+### Swagger
+
+O Swagger é uma linguagem de descrição de interface para descrever APIs RESTful expressas usando JSON. O Swagger
+inclui uma documentação de interface de usuário que permite que as partes interessadas visualizem e interajam com
+as recursos da API sem ter conhecimento de como a API foi implementada.
 
 A documentação da API foi feita utilizando o Swagger, para acessar a documentação acesse o
 endereço http://localhost:5000/ e você terá acesso a documentação completa da API.
@@ -318,6 +337,44 @@ security_token = jwt.encode({
   es_logger.info('Token gerado com sucesso')
   return {'token': security_token}
 ```
+
+### ElasticSearch
+
+O ElasticSearch é um sistema de busca e análise de dados distribuído,
+baseado no Apache Lucene. Ele é um serviço de busca completo e de código aberto, com recursos semelhantes aos serviços
+de busca comerciais.
+
+- Para instalá-lo, basta utilizar o comando:
+
+```bash
+pip install elasticsearch==7.14.0
+```
+
+É necessário configurar a variável de ambiente ELASTICSEARCH_URL para permitir o acesso à aplicação. Para isso, defina o
+valor como http://elasticsearch:9200.
+
+```bash
+ELASTICSEARCH_URL = http://elasticsearch:9200
+```
+
+Para criar o container do ElasticSearch, adicione o serviço no arquivo docker-compose.yml com as configurações abaixo:
+
+```bash
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+```
+
+Assim, é possível salvar os logs da aplicação no ElasticSearch, que está rodando em um container Docker.
+
+
+
 
 ---
 
