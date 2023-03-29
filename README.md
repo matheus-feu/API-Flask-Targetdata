@@ -112,10 +112,10 @@ Por fim vamos executar o projeto:
 python run.py
 ```
 
-A aplicação deverá estar rodando na porta 5000, acesse o endereço http://localhost:5000/ para ver se está tudo
+A aplicação deverá estar rodando na porta 5000, acesse o endereço http://localhost:5000/docs para ver se está tudo
 funcionando corretamente.
 
-![documentacao](https://imgur.com/S2MJ9ne.png)
+![documentacao](https://imgur.com/U6pOS2z.png)
 
 ## 📌 Endpoints
 
@@ -265,7 +265,7 @@ inclui uma documentação de interface de usuário que permite que as partes int
 as recursos da API sem ter conhecimento de como a API foi implementada.
 
 A documentação da API foi feita utilizando o Swagger, para acessar a documentação acesse o
-endereço http://localhost:5000/ e você terá acesso a documentação completa da API.
+endereço http://localhost:5000/docs e você terá acesso a documentação completa da API.
 
 ### Flasgger
 
