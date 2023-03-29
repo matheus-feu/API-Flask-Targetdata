@@ -48,3 +48,10 @@ def login():
     else:
         es_logger.warning(f"Usuario: {request_login.username} não existe")
         return {'message': f"Usuario: {request_login.username} não existe"}, 404
+
+
+@app.errorhandler(jwt.ExpiredSignatureError)
+def handle_expired_token(error):
+    """Trata os erros de token expirado."""
+    es_logger.warning(f"error: {error.description}")
+    return ({'error': f'{str(error)}'}, 401)
