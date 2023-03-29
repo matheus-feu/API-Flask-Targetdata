@@ -39,4 +39,6 @@ def signup():
 def handle_bad_request(error):
     """Trata os erros de requisição JSON."""
     es_logger.warning(f"error: {error.description}")
-    return ({'error': f'{str(error)} é um campo obrigatório'}, 400)
+    message = "Sua requisição JSON não contém um campo obrigatório. Por favor, verifique se a sua requisição contém todos os campos necessários e tente novamente."
+
+    return {'error': message}, 400
