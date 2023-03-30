@@ -16,7 +16,6 @@
 
 ## 📝 Sobre
 
-Este projeto foi desenvolvido para o processo seletivo da [Targetdata](https://www.linkedin.com/company/targetdata/).
 Neste projeto foi desenvolvido utilizando o ***microframework*** Flask escrita em **Python** que retorna JSON integrando
 com
 duas **APIs** públicas e
@@ -85,15 +84,6 @@ git clone https://github.com/matheus-feu/API-Flask-Targetdata.git
 
 # Entrar no diretório
 cd API-Flask-Targetdata
-
-# Criar um ambiente virtual
-virtualenv venv
-
-# Ativar o ambiente virtual
-venv\Scripts\activate
-
-# Instalar as dependências
-pip install -r requirements.txt
 ```
 
 #### Agora vamos criar os containers:
@@ -106,16 +96,20 @@ os containers e baixar as imagens necessárias que estão configurada no `Docker
 docker-compose up -d
 ```
 
-Por fim vamos executar o projeto:
-
-```bash
-python run.py
-```
-
-A aplicação deverá estar rodando na porta 5000, acesse o endereço http://localhost:5000/docs para ver se está tudo
-funcionando corretamente.
+Dessa forma você terá os containers rodando em segundo plano e poderá acessar a aplicação através do
+endereço http://localhost:5000/docs
+para ver se está tudo funcionando corretamente.
 
 ![documentacao](https://imgur.com/U6pOS2z.png)
+
+Não esqueça de mudar o nome do arquivo `.env.example` para `.env` e preencher as variáveis de ambiente com as suas
+credenciais.
+
+```bash
+SECRET_KEY=your_secret_key
+MONGO_HOST=mongodb
+MONGO_PORT=27017
+```
 
 ## 📌 Endpoints
 
@@ -125,8 +119,8 @@ O fluxo de requisição é da seguinte forma:
 - O usuário faz o login na API e recebe um token JWT;
 - O usuário passa o x-acess-token no header da requisição para consumir o endpoint de consulta da previsão do tempo.;
 - O usuário envia o CEP para a API e recebe a previsão do tempo dos próximos 4 dias;
-- Há um método que salva todos os logs do usuário como: IP Address, User-Agent, Provedor, 
-Cidade e o código da cidade no ElasticSearch, podendo ser consultado através do endpoint /logs.
+- Há um método que salva todos os logs do usuário como: IP Address, User-Agent, Provedor,
+  Cidade e o código da cidade no ElasticSearch, podendo ser consultado através do endpoint /logs.
 
 **POST** /signup - Este endpoint é responsável por realizar o registro do usuário e senha na API.
 
