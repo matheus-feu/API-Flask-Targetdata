@@ -39,8 +39,6 @@ No geral a API oferece uma solução completa para o sistema de previsão do tem
 que podem ser úteis para diferentes tipos de sistemas.
 
 
-<div id="#tecnologias-usadas"></div>
-
 ## 🔗 Tecnologias Usadas
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
